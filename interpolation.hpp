@@ -13,7 +13,7 @@ type lerp (const type& a, const type& b, weight_type w)
   type result;
   std::transform(a.begin(), a.end(), b.begin(), result.begin(), [&] (const auto a_element, const auto b_element)
   {
-    return (1 - w) * a_element + w * b_element;
+    return (weight_type(1) - w) * a_element + w * b_element;
   });
   return result;
 }
@@ -22,8 +22,8 @@ type slerp(const type& a, const type& b, weight_type w)
 {
   type result;
   auto o            = std::acos(std::inner_product(a.begin(), a.end(), b.begin(), 0));
-  auto a_precompute = std::sin((1 - w) * o) / std::sin(o);
-  auto b_precompute = std::sin(     w  * o) / std::sin(o);
+  auto a_precompute = std::sin((weight_type(1) - w) * o) / std::sin(o);
+  auto b_precompute = std::sin(                  w  * o) / std::sin(o);
   std::transform(a.begin(), a.end(), b.begin(), result.begin(), [&] (const auto a_element, const auto b_element)
   {
     return a_precompute * a_element + b_precompute * b_element;
