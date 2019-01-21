@@ -36,6 +36,9 @@ Ravels and unravels N-dimensional indices to 1-dimensional and vice versa, simil
 **permute_for.hpp**
 Permutes the loop `for(auto i = start, i < end; i+= step)` over N dimensions.
 
+**prime_factorization.hpp**
+Computes the prime factors of the given integer. Useful for partitioning N-dimensional data to a number of threads.
+
 **random_number_generator.hpp**
 Encapsulates `<random>` boilerplate. Specify a distribution and go.
 
