@@ -1,5 +1,5 @@
-#ifndef ACD_PARTITIONER_HPP_
-#define ACD_PARTITIONER_HPP_
+#ifndef ACD_PARTITIONER_HPP
+#define ACD_PARTITIONER_HPP
 
 #include <algorithm>
 #include <array>
