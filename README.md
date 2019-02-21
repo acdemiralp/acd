@@ -33,6 +33,9 @@ Ravels and unravels N-dimensional indices to 1-dimensional and vice versa, simil
 **interpolation.hpp**
 [Linear interpolation (LERP)](https://en.wikipedia.org/wiki/Linear_interpolation) and [spherical linear interpolation (SLERP)](https://en.wikipedia.org/wiki/Slerp).
 
+**partitioner.hpp**
+Partitions an N-dimensional domain to a hyperrectangular grid based on communicator rank and size. Intended for use with MPI.
+
 **permute_for.hpp**
 Permutes the loop `for(auto i = start, i < end; i+= step)` over N dimensions.
 
