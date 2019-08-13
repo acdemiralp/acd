@@ -28,11 +28,11 @@ public:
   , communicator_size_(communicator_size)
   , domain_size_      (domain_size      )
   {
-    update();
+    partitioner<dimensions>::update();
   }
   partitioner           (const partitioner&  that) = default;
   partitioner           (      partitioner&& temp) = default;
- ~partitioner           ()                         = default;
+  virtual ~partitioner  ()                         = default;
   partitioner& operator=(const partitioner&  that) = default;
   partitioner& operator=(      partitioner&& temp) = default;
 
@@ -83,7 +83,7 @@ public:
   }
 
 protected:
-  void update()
+  virtual void update()
   {
     auto prime_factors = prime_factorize(communicator_size_);
     auto current_size  = domain_size_;
