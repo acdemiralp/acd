@@ -5,6 +5,7 @@
 
 #include <array>
 #include <cmath>
+#include <math.h>
 #include <random>
 
 namespace acd

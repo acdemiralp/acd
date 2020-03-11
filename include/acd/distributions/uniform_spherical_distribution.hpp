@@ -6,6 +6,7 @@
 #include <array>
 #include <cmath>
 #include <istream>
+#include <math.h>
 #include <random>
 #include <type_traits>
 
