@@ -33,31 +33,26 @@ public:
   random_number_generator& operator=(const random_number_generator&  that) = default;
   random_number_generator& operator=(      random_number_generator&& temp) = default;
 
-  distribution_type&           distribution()
-  {
-    return distribution_;
-  }
-
-  result_type                  generate    ()
+  result_type                  generate()
   {
     return distribution_(mersenne_twister_);
   }
   template<typename vector_type> 
-  vector_type                  generate    (std::size_t                size)
+  vector_type                  generate(std::size_t                size)
   {
     vector_type vector(size);
     std::generate_n(&vector[0], size, function());
     return vector;
   }
   template<typename matrix_type>
-  matrix_type                  generate    (std::array<std::size_t, 2> size)
+  matrix_type                  generate(std::array<std::size_t, 2> size)
   {
     matrix_type matrix(size[0], size[1]);
     std::generate_n(&matrix[0][0], size[0] * size[1], function());
     return matrix;
   }
 
-  std::function<result_type()> function    ()
+  std::function<result_type()> function()
   {
     return std::bind(static_cast<result_type(random_number_generator<distribution_type>::*)()>(&random_number_generator<distribution_type>::generate), this);
   }
