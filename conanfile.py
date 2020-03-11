@@ -5,7 +5,7 @@ import os
 class Project(ConanFile):
     name            = "acd"
     description     = "Conan package for acd."
-    version         = "1.1.0"                
+    version         = "1.2.0"                
     url             = "https://github.com/acdemiralp/acd"
     settings        = "arch", "build_type", "compiler", "os"
     generators      = "cmake"
