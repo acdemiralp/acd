@@ -5,7 +5,7 @@ import os
 class Project(ConanFile):
     name            = "acd"
     description     = "Conan package for acd."
-    version         = "1.0.0"                
+    version         = "1.2.0"                
     url             = "https://github.com/acdemiralp/acd"
     settings        = "arch", "build_type", "compiler", "os"
     generators      = "cmake"
@@ -16,7 +16,7 @@ class Project(ConanFile):
        self.copy("*.dll"   , dst="", src="bin")
 
     def source(self):
-        zip_name = "v%s.zip" % self.version
+        zip_name = "%s.zip" % self.version
         download ("%s/archive/%s" % (self.url, zip_name), zip_name, verify=False)
         unzip    (zip_name)
         os.unlink(zip_name)
