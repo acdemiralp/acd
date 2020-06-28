@@ -96,7 +96,7 @@ protected:
       prime_factors.pop_back();
     }
     std::transform(domain_size_.begin(), domain_size_.end(), grid_size_       .begin(), block_size_ .begin(), std::divides   <>());
-    rank_multi_index_ = unravel_index<dimensions>(communicator_rank_, grid_size_);
+    rank_multi_index_ = unravel_index(communicator_rank_, grid_size_);
     std::transform(block_size_ .begin(), block_size_ .end(), rank_multi_index_.begin(), rank_offset_.begin(), std::multiplies<>());
   }
   
