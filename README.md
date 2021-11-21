@@ -24,6 +24,9 @@ Uniform distribution on the 2-sphere/hemisphere, compliant with `<random>`.
 **bitset_enum.hpp**
 Declare `struct is_bitset_enum<your_enum> { static const bool enable = true; }` to enable bitset operations on `your_enum`.
 
+**constexpr_for.hpp**
+Compile-time for loop as well as its variants for variadic templates and tuples.
+
 **enable_dedicated_gpu.hpp**
 Enables AMD and NVIDIA GPUs on laptops or other systems which default to onboard graphics. Include once in main.
 
