@@ -1,6 +1,14 @@
 #ifndef ACD_PERMUTE_FOR_HPP
 #define ACD_PERMUTE_FOR_HPP
 
+#ifndef __host__
+#define __host__
+#endif
+
+#ifndef __device__
+#define __device__
+#endif
+
 #include <cstddef>
 #include <functional>
 
@@ -8,7 +16,7 @@ namespace acd
 {
 // Ducks [] and .size() on the type.
 template <typename type>
-void permute_for(
+__host__ __device__ void permute_for(
   const std::function<void(const type&)>& function, 
   const type&                             start   ,
   const type&                             end     ,

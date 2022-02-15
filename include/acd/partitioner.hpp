@@ -16,14 +16,14 @@ namespace acd
 // Also computes a rank_multi_index which is the N-dimensional index of the rank, and a 
 // rank_offset which equals block_size * rank_multi_index, based on the communicator_rank 
 // (process/thread index). Intended for use with MPI.
-template<std::size_t dimensions>
+template<std::size_t dimensions, typename size_type = std::size_t, typename container_type = std::array<size_type, dimensions>>
 class partitioner
 {
 public:
   explicit partitioner(
-    const std::size_t                          communicator_rank, 
-    const std::size_t                          communicator_size, 
-    const std::array<std::size_t, dimensions>& domain_size      )
+    const size_type       communicator_rank, 
+    const size_type       communicator_size, 
+    const container_type& domain_size      )
   : communicator_rank_(communicator_rank)
   , communicator_size_(communicator_size)
   , domain_size_      (domain_size      )
@@ -36,48 +36,55 @@ public:
   partitioner& operator=(const partitioner&  that) = default;
   partitioner& operator=(      partitioner&& temp) = default;
 
-  void set_communicator_rank(const std::size_t                          communicator_rank)
+  void set_communicator_rank(const size_type       communicator_rank)
   {
     communicator_rank_ = communicator_rank;
     update();
   }
-  void set_communicator_size(const std::size_t                          communicator_size)
+  void set_communicator_size(const size_type       communicator_size)
   {
     communicator_size_ = communicator_size;
     update();
   }
-  void set_domain_size      (const std::array<std::size_t, dimensions>& domain_size      )
+  void set_domain_size      (const container_type& domain_size      )
   {
     domain_size_ = domain_size;
     update();
   }
   
-  const std::size_t                          communicator_rank() const
+  [[nodiscard]]
+  size_type             communicator_rank() const
   {
     return communicator_rank_;
   }
-  const std::size_t                          communicator_size() const
+  [[nodiscard]]
+  size_type             communicator_size() const
   {
     return communicator_size_;
   }
-  const std::array<std::size_t, dimensions>& domain_size      () const
+  [[nodiscard]]
+  const container_type& domain_size      () const
   {
     return domain_size_;
   }
 
-  const std::array<std::size_t, dimensions>& grid_size        () const
+  [[nodiscard]]
+  const container_type& grid_size        () const
   {
     return grid_size_;
   }
-  const std::array<std::size_t, dimensions>& block_size       () const
+  [[nodiscard]]
+  const container_type& block_size       () const
   {
     return block_size_;
   }
-  const std::array<std::size_t, dimensions>& rank_multi_index () const
+  [[nodiscard]]
+  const container_type& rank_multi_index () const
   {
     return rank_multi_index_;
   }
-  const std::array<std::size_t, dimensions>& rank_offset      () const
+  [[nodiscard]]
+  const container_type& rank_offset      () const
   {
     return rank_offset_;
   }
@@ -100,14 +107,14 @@ protected:
     std::transform(block_size_ .begin(), block_size_ .end(), rank_multi_index_.begin(), rank_offset_.begin(), std::multiplies<>());
   }
   
-  std::size_t                         communicator_rank_;
-  std::size_t                         communicator_size_;
-  std::array<std::size_t, dimensions> domain_size_      ;
+  size_type      communicator_rank_;
+  size_type      communicator_size_;
+  container_type domain_size_      ;
 
-  std::array<std::size_t, dimensions> grid_size_        ;
-  std::array<std::size_t, dimensions> block_size_       ;
-  std::array<std::size_t, dimensions> rank_multi_index_ ;
-  std::array<std::size_t, dimensions> rank_offset_      ;
+  container_type grid_size_        ;
+  container_type block_size_       ;
+  container_type rank_multi_index_ ;
+  container_type rank_offset_      ;
 };
 }
 

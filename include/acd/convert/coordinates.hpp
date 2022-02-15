@@ -1,12 +1,20 @@
 #ifndef ACD_CONVERT_COORDINATES_HPP
 #define ACD_CONVERT_COORDINATES_HPP
 
+#ifndef __host__
+#define __host__
+#endif
+
+#ifndef __device__
+#define __device__
+#endif
+
 #include <cmath>
 
 namespace acd
 {
 template<typename type>
-type to_spherical(const type& cartesian)
+__host__ __device__ type to_spherical(const type& cartesian)
 {
   type spherical;
   spherical[0] = std::sqrt (std::pow(cartesian[0], 2) + std::pow(cartesian[1], 2) + std::pow(cartesian[2], 2));
@@ -15,7 +23,7 @@ type to_spherical(const type& cartesian)
   return spherical;
 }
 template<typename type>
-type to_cartesian(const type& spherical)
+__host__ __device__ type to_cartesian(const type& spherical)
 {
   type cartesian;
   cartesian[0] = spherical[0] * std::cos(spherical[1]) * std::sin(spherical[2]);
