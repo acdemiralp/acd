@@ -1,6 +1,14 @@
 #ifndef ACD_INTERPOLATION_HPP
 #define ACD_INTERPOLATION_HPP
 
+#ifndef __host__
+#define __host__
+#endif
+
+#ifndef __device__
+#define __device__
+#endif
+
 #include <algorithm>
 #include <cmath>
 #include <numeric>
@@ -8,7 +16,7 @@
 namespace acd
 {
 template<typename type, typename weight_type>
-type lerp (const type& a, const type& b, weight_type w) 
+__host__ __device__ type lerp (const type& a, const type& b, weight_type w)
 {
   type result;
   std::transform(a.begin(), a.end(), b.begin(), result.begin(), [&] (const auto a_element, const auto b_element)
@@ -18,7 +26,7 @@ type lerp (const type& a, const type& b, weight_type w)
   return result;
 }
 template<typename type, typename weight_type>
-type slerp(const type& a, const type& b, weight_type w)
+__host__ __device__ type slerp(const type& a, const type& b, weight_type w)
 {
   type result;
   auto o            = std::acos(std::inner_product(a.begin(), a.end(), b.begin(), 0));

@@ -1,6 +1,14 @@
 #ifndef ACD_SINGLETON_HPP
 #define ACD_SINGLETON_HPP
 
+#ifndef __host__
+#define __host__
+#endif
+
+#ifndef __device__
+#define __device__
+#endif
+
 #include <utility>
 
 namespace acd
@@ -9,15 +17,15 @@ template <typename derived>
 class singleton
 {
 public:
-  singleton           ()                       = default;
-  singleton           (const singleton&  that) = delete ;
-  singleton           (      singleton&& temp) = delete ;
-  virtual ~singleton  ()                       = default;
-  singleton& operator=(const singleton&  that) = delete ;
-  singleton& operator=(      singleton&& temp) = delete ;
+  __host__ __device__ singleton           ()                       = default;
+  __host__ __device__ singleton           (const singleton&  that) = delete ;
+  __host__ __device__ singleton           (      singleton&& temp) = delete ;
+  __host__ __device__ virtual ~singleton  ()                       = default;
+  __host__ __device__ singleton& operator=(const singleton&  that) = delete ;
+  __host__ __device__ singleton& operator=(      singleton&& temp) = delete ;
 
   template <typename... argument_types>
-  static derived& instance(argument_types&&... arguments)
+  __host__ __device__ static derived& instance(argument_types&&... arguments)
   {
     static derived instance(std::forward<argument_types>(arguments)...);
     return instance;

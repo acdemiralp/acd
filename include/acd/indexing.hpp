@@ -1,6 +1,14 @@
 #ifndef ACD_INDEXING_HPP
 #define ACD_INDEXING_HPP
 
+#ifndef __host__
+#define __host__
+#endif
+
+#ifndef __device__
+#define __device__
+#endif
+
 #include <cstdint>
 #include <cstddef>
 
@@ -8,7 +16,7 @@ namespace acd
 {
 // Ducks [] and .size() on the type.
 template <typename type>
-type        unravel_index    (std::size_t index      , const type& dimensions)
+__host__ __device__ type        unravel_index    (std::size_t index      , const type& dimensions)
 {
   type subscripts;
   for (std::int64_t i = dimensions.size() - 1; i >= 0; --i)
@@ -21,7 +29,7 @@ type        unravel_index    (std::size_t index      , const type& dimensions)
 
 // Ducks [] and .size() on the type.
 template <typename type>
-std::size_t ravel_multi_index(const type& multi_index, const type& dimensions)
+__host__ __device__ std::size_t ravel_multi_index(const type& multi_index, const type& dimensions)
 {
   std::size_t index(0);
   for (std::size_t i = 0; i < dimensions.size(); ++i)

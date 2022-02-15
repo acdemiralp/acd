@@ -5,17 +5,17 @@
 
 namespace acd
 {
-template<std::size_t dimensions>
-class ghost_partitioner : public partitioner<dimensions>
+template<std::size_t dimensions, typename size_type = std::size_t, typename container_type = std::array<size_type, dimensions>>
+class ghost_partitioner : public partitioner<dimensions, size_type, container_type>
 {
 public:
   using base = partitioner<dimensions>;
 
   explicit ghost_partitioner(
-    const std::size_t                          communicator_rank, 
-    const std::size_t                          communicator_size, 
-    const std::array<std::size_t, dimensions>& domain_size      ,
-    const std::array<std::size_t, dimensions>& ghost_cell_size  )
+    const size_type       communicator_rank, 
+    const size_type       communicator_size, 
+    const container_type& domain_size      ,
+    const container_type& ghost_cell_size  )
   : partitioner(communicator_rank, communicator_size, domain_size), ghost_cell_size_(ghost_cell_size)
   {
     ghost_partitioner<dimensions>::update();
@@ -26,21 +26,21 @@ public:
   ghost_partitioner& operator=(const ghost_partitioner&  that) = default;
   ghost_partitioner& operator=(      ghost_partitioner&& temp) = default;
 
-  void                                       set_ghost_cell_size(const std::array<std::size_t, dimensions>& ghost_cell_size)
+  void                                       set_ghost_cell_size(const container_type& ghost_cell_size)
   {
     ghost_cell_size_ = ghost_cell_size;
     ghost_partitioner<dimensions>::update();
   }
 
-  const std::array<std::size_t, dimensions>& ghost_cell_size    () const
+  const container_type& ghost_cell_size    () const
   {
     return ghost_cell_size_;
   }
-  const std::array<std::size_t, dimensions>& ghosted_block_size () const
+  const container_type& ghosted_block_size () const
   {
     return ghosted_block_size_;
   }
-  const std::array<std::size_t, dimensions>& ghosted_rank_offset() const
+  const container_type& ghosted_rank_offset() const
   {
     return ghosted_rank_offset_;
   }
@@ -63,9 +63,9 @@ protected:
     }
   }
 
-  std::array<std::size_t, dimensions> ghost_cell_size_    ;
-  std::array<std::size_t, dimensions> ghosted_block_size_ ;
-  std::array<std::size_t, dimensions> ghosted_rank_offset_;
+  container_type ghost_cell_size_    ;
+  container_type ghosted_block_size_ ;
+  container_type ghosted_rank_offset_;
 };
 }
 
