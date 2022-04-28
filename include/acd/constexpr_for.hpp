@@ -1,13 +1,4 @@
-#ifndef ACD_CONSTEXPR_FOR_HPP
-#define ACD_CONSTEXPR_FOR_HPP
-
-#ifndef __host__
-#define __host__
-#endif
-
-#ifndef __device__
-#define __device__
-#endif
+#pragma once
 
 #include <cstddef>
 #include <tuple>
@@ -17,7 +8,7 @@
 namespace acd
 {
 template <auto begin, auto end, auto increment, typename function_type>
-__host__ __device__ constexpr void constexpr_for      (function_type&& function)
+constexpr void constexpr_for      (function_type&& function)
 {
   if constexpr (begin < end)
   {
@@ -26,12 +17,12 @@ __host__ __device__ constexpr void constexpr_for      (function_type&& function)
   }
 }
 template <typename function_type, typename... argument_types>
-__host__ __device__ constexpr void constexpr_for      (function_type&& function, argument_types&&... arguments)
+constexpr void constexpr_for      (function_type&& function, argument_types&&... arguments)
 {
   (function(std::forward<argument_types>(arguments)), ...);
 }
 template <typename function_type, typename tuple_type>
-__host__ __device__ constexpr void constexpr_for_tuple(function_type&& function, tuple_type&& tuple)
+constexpr void constexpr_for_tuple(function_type&& function, tuple_type&& tuple)
 {
   constexpr std::size_t count = std::tuple_size_v<std::decay_t<tuple_type>>;
   constexpr_for<static_cast<std::size_t>(0), count, static_cast<std::size_t>(1)>([&] (auto i)
@@ -40,5 +31,3 @@ __host__ __device__ constexpr void constexpr_for_tuple(function_type&& function,
   });
 }
 }
-
-#endif

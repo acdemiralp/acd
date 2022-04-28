@@ -1,5 +1,4 @@
-#ifndef ACD_DISTRIBUTIONS_VON_MISES_FISHER_DISTRIBUTION_HPP
-#define ACD_DISTRIBUTIONS_VON_MISES_FISHER_DISTRIBUTION_HPP
+#pragma once
 
 #define _USE_MATH_DEFINES
 
@@ -264,5 +263,3 @@ std::basic_istream<stream_type, stream_traits>& operator>>(std::basic_istream<st
   return stream;
 }
 }
-
-#endif

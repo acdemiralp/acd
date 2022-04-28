@@ -1,5 +1,4 @@
-#ifndef ACD_PARTITIONER_HPP
-#define ACD_PARTITIONER_HPP
+#pragma once
 
 #include <algorithm>
 #include <array>
@@ -117,5 +116,3 @@ protected:
   container_type rank_offset_      ;
 };
 }
-
-#endif

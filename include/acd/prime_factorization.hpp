@@ -1,13 +1,4 @@
-#ifndef ACD_PRIME_FACTORIZATION_HPP_
-#define ACD_PRIME_FACTORIZATION_HPP_
-
-#ifndef __host__
-#define __host__
-#endif
-
-#ifndef __device__
-#define __device__
-#endif
+#pragma once
 
 #include <cmath>
 #include <vector>
@@ -15,7 +6,7 @@
 namespace acd
 {
 template<typename type>
-__host__ __device__ std::vector<type> prime_factorize(type value)
+constexpr std::vector<type> prime_factorize(type value)
 {
   std::vector<type> prime_factors;
 
@@ -36,5 +27,3 @@ __host__ __device__ std::vector<type> prime_factorize(type value)
   return prime_factors;
 }
 }
-
-#endif
