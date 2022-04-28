@@ -1,5 +1,4 @@
-#ifndef ACD_GHOST_PARTITIONER_HPP
-#define ACD_GHOST_PARTITIONER_HPP
+#pragma once
 
 #include "partitioner.hpp"
 
@@ -68,5 +67,3 @@ protected:
   container_type ghosted_rank_offset_;
 };
 }
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef ACD_ENABLE_DEDICATED_GPU_HPP
-#define ACD_ENABLE_DEDICATED_GPU_HPP
+#pragma once
 
 #include <cstdint>
 
@@ -14,6 +13,4 @@ inline __declspec(dllexport) std::uint32_t NvOptimusEnablement                  
 inline                       std::int32_t  AmdPowerXpressRequestHighPerformance = 1;
 inline                       std::uint32_t NvOptimusEnablement                  = 0x00000001;
 }
-#endif
-
 #endif

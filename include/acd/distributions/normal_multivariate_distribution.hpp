@@ -1,5 +1,4 @@
-#ifndef ACD_DISTRIBUTIONS_NORMAL_MULTIVARIATE_DISTRIBUTION_HPP
-#define ACD_DISTRIBUTIONS_NORMAL_MULTIVARIATE_DISTRIBUTION_HPP
+#pragma once
 
 #include <algorithm>
 #include <array>
@@ -208,5 +207,3 @@ std::basic_istream<stream_type, stream_traits>& operator>>(std::basic_istream<st
   return stream;
 }
 }
-
-#endif

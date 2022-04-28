@@ -1,5 +1,4 @@
-#ifndef ACD_RANDOM_NUMBER_GENERATOR_HPP
-#define ACD_RANDOM_NUMBER_GENERATOR_HPP
+#pragma once
 
 #include <algorithm>
 #include <array>
@@ -68,5 +67,3 @@ protected:
   distribution_type  distribution_    ;
 };
 }
-
-#endif
