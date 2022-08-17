@@ -3,7 +3,7 @@
 #include <type_traits>
 #include <utility>
 
-namespace fd
+namespace acd
 {
 template <typename type, type n, typename = std::make_integer_sequence<type, n>>
 struct factorial_t;
