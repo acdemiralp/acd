@@ -5,7 +5,7 @@
 namespace acd
 {
 // Note: These functions work best with unsigned integral types.
-// Using signed types may lead to unexpected behavior with negative values.
+// Using signed types with negative values will produce undefined results.
 template<typename type>
 constexpr bool is_power_of_two(const type value)
 {
@@ -16,31 +16,33 @@ constexpr bool is_power_of_two(const type value)
 
 // Returns the smallest power of two that is greater than or equal to value.
 // Note: Does not check for overflow. If value is too large, result will be incorrect.
+// Only valid for non-negative values.
 template<typename type>
 constexpr type next_power_of_two(type value)
 {
   static_assert(std::is_integral_v<type>, "next_power_of_two requires integral types");
   
-  if (value == 0)
+  if (value <= 0)
     return 1;
   
   --value;
-  for (auto i = 1; i < sizeof(type) * 8; i *= 2)
+  for (std::size_t i = 1; i < sizeof(type) * 8; i *= 2)
     value |= value >> i;
   
   return value + 1;
 }
 
 // Returns the largest power of two that is less than or equal to value.
+// Only valid for non-negative values.
 template<typename type>
 constexpr type previous_power_of_two(type value)
 {
   static_assert(std::is_integral_v<type>, "previous_power_of_two requires integral types");
   
-  if (value == 0)
+  if (value <= 0)
     return 0;
   
-  for (auto i = 1; i < sizeof(type) * 8; i *= 2)
+  for (std::size_t i = 1; i < sizeof(type) * 8; i *= 2)
     value |= value >> i;
   
   return value - (value >> 1);
