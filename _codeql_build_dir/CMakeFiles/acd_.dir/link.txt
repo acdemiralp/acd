@@ -1,0 +1,2 @@
+/usr/bin/ar qc libacd_.a
+/usr/bin/ranlib libacd_.a
